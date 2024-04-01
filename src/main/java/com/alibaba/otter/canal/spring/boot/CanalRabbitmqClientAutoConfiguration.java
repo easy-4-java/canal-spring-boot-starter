@@ -41,18 +41,20 @@ public class CanalRabbitmqClientAutoConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true")
-	public MessageHandler messageHandler(RowDataHandler<List<Map<String, String>>> rowDataHandler,
+	@ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true", matchIfMissing = true)
+	public MessageHandler asyncMessageHandler(CanalProperties properties,
+										 RowDataHandler<List<Map<String, String>>> rowDataHandler,
 										 ObjectProvider<EntryHandler> entryHandlerProvider,
 										 @Qualifier("canalTaskExecutor") ThreadPoolTaskExecutor canalTaskExecutor) {
-		return new AsyncFlatMessageHandlerImpl(entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler, canalTaskExecutor);
+		return new AsyncFlatMessageHandlerImpl(properties.getSubscribeTypes(), entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler, canalTaskExecutor);
 	}
 
 	@Bean
 	@ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "false")
-	public MessageHandler messageHandler(RowDataHandler<List<Map<String, String>>> rowDataHandler,
+	public MessageHandler syncMessageHandler(CanalProperties properties,
+										 RowDataHandler<List<Map<String, String>>> rowDataHandler,
 										 ObjectProvider<EntryHandler> entryHandlerProvider) {
-		return new SyncFlatMessageHandlerImpl(entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler);
+		return new SyncFlatMessageHandlerImpl(properties.getSubscribeTypes(), entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler);
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "stop")

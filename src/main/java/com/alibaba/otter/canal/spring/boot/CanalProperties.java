@@ -46,7 +46,7 @@ public class CanalProperties {
 	/**
 	 * 是否异步
 	 */
-	private boolean async = false;
+	private Boolean async;
 	/**
 	 * The client subscribes to filter, and the corresponding filter information will be updated when the subscription is repeated
 	 * <pre>

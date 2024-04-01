@@ -40,17 +40,20 @@ public class CanalSimpleClientAutoConfiguration {
     }
 
     @Bean
-    //@ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true", matchIfMissing = true)
-    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler,
-                                         ObjectProvider<EntryHandler> entryHandlerProvider,
-                                         @Qualifier("canalTaskExecutor") ThreadPoolTaskExecutor threadPoolTaskExecutor) {
-        return new AsyncMessageHandlerImpl(entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler, threadPoolTaskExecutor);
+    @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true", matchIfMissing = true)
+    public MessageHandler asyncMessageHandler(CanalProperties properties,
+                                            RowDataHandler<CanalEntry.RowData> rowDataHandler,
+                                            ObjectProvider<EntryHandler> entryHandlerProvider,
+                                            @Qualifier("canalTaskExecutor") ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+        return new AsyncMessageHandlerImpl(properties.getSubscribeTypes(), entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler, threadPoolTaskExecutor);
     }
 
     @Bean
-    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler,
-                                         ObjectProvider<EntryHandler> entryHandlerProvider) {
-        return new SyncMessageHandlerImpl(entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler);
+    @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "false")
+    public MessageHandler syncMessageHandler(CanalProperties properties,
+                                            RowDataHandler<CanalEntry.RowData> rowDataHandler,
+                                            ObjectProvider<EntryHandler> entryHandlerProvider) {
+        return new SyncMessageHandlerImpl(properties.getSubscribeTypes(), entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler);
     }
 
     @Bean(initMethod = "start", destroyMethod = "stop")
@@ -73,6 +76,7 @@ public class CanalSimpleClientAutoConfiguration {
                 .timeout(canalProperties.getTimeout())
                 .unit(canalProperties.getUnit())
                 .messageHandler(messageHandler)
+                .setSubscribeTypes(canalProperties.getSubscribeTypes())
                 .build(simpleCanalConnectors);
     }
 

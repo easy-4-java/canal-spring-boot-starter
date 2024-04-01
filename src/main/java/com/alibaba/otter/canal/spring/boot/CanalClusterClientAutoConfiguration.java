@@ -40,18 +40,20 @@ public class CanalClusterClientAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true")
-    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler,
+    @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true", matchIfMissing = true)
+    public MessageHandler asyncMessageHandler(CanalProperties properties,
+                                         RowDataHandler<CanalEntry.RowData> rowDataHandler,
                                          ObjectProvider<EntryHandler> entryHandlerProvider,
                                          ThreadPoolTaskExecutor threadPoolTaskExecutor) {
-        return new AsyncMessageHandlerImpl(entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler, threadPoolTaskExecutor);
+        return new AsyncMessageHandlerImpl(properties.getSubscribeTypes(), entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler, threadPoolTaskExecutor);
     }
 
     @Bean
     @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "false")
-    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler,
+    public MessageHandler syncMessageHandler(CanalProperties properties,
+                                         RowDataHandler<CanalEntry.RowData> rowDataHandler,
                                          ObjectProvider<EntryHandler> entryHandlerProvider) {
-        return new SyncMessageHandlerImpl(entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler);
+        return new SyncMessageHandlerImpl(properties.getSubscribeTypes(), entryHandlerProvider.stream().collect(Collectors.toList()), rowDataHandler);
     }
 
     @Bean(initMethod = "start", destroyMethod = "stop")
