@@ -29,19 +29,11 @@ public class CanalClusterProperties {
     public static class Instance {
 
         /**
-         * Canal Server 主机地址
-         */
-        private String host;
-        /**
-         * Canal Server 端口。默认为 11111
-         */
-        private Integer port = DEFAULT_PORT;
-        /**
-         * Canal Server 地址。如果设置了该属性，则忽略host和port属性。
+         * Canal Server 地址
          */
         private String addresses;
         /**
-         * Canal Zookeeper 地址
+         * Canal Zookeeper 地址。如果设置了该属性，则忽略addresses属性。
          */
         private String zkServers;
         /**
