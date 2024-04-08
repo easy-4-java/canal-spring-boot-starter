@@ -73,7 +73,7 @@ public class CanalUtils {
         }
 
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
-        logger.info(context_format, new Object[] { batchId, size, memsize, format.format(new Date()), startPosition,
+        logger.debug(context_format, new Object[] { batchId, size, memsize, format.format(new Date()), startPosition,
                 endPosition });
     }
 
@@ -105,12 +105,12 @@ public class CanalUtils {
                         throw new RuntimeException("parse event has an error , data:" + entry.toString(), e);
                     }
                     // 打印事务头信息，执行的线程id，事务耗时
-                    logger.info(transaction_format,
+                    logger.debug(transaction_format,
                         new Object[] { entry.getHeader().getLogfileName(),
                                 String.valueOf(entry.getHeader().getLogfileOffset()),
                                 String.valueOf(entry.getHeader().getExecuteTime()), simpleDateFormat.format(date),
                                 entry.getHeader().getGtid(), String.valueOf(delayTime) });
-                    logger.info(" BEGIN ----> Thread id: {}", begin.getThreadId());
+                    logger.debug(" BEGIN ----> Thread id: {}", begin.getThreadId());
                     printXAInfo(begin.getPropsList());
                 } else if (entry.getEntryType() == EntryType.TRANSACTIONEND) {
                     TransactionEnd end = null;
@@ -120,10 +120,10 @@ public class CanalUtils {
                         throw new RuntimeException("parse event has an error , data:" + entry.toString(), e);
                     }
                     // 打印事务提交信息，事务id
-                    logger.info("----------------\n");
-                    logger.info(" END ----> transaction id: {}", end.getTransactionId());
+                    logger.debug("----------------\n");
+                    logger.debug(" END ----> transaction id: {}", end.getTransactionId());
                     printXAInfo(end.getPropsList());
-                    logger.info(transaction_format,
+                    logger.debug(transaction_format,
                         new Object[] { entry.getHeader().getLogfileName(),
                                 String.valueOf(entry.getHeader().getLogfileOffset()),
                                 String.valueOf(entry.getHeader().getExecuteTime()), simpleDateFormat.format(date),
@@ -143,7 +143,7 @@ public class CanalUtils {
 
                 EventType eventType = rowChage.getEventType();
 
-                logger.info(row_format,
+                logger.debug(row_format,
                     new Object[] { entry.getHeader().getLogfileName(),
                             String.valueOf(entry.getHeader().getLogfileOffset()), entry.getHeader().getSchemaName(),
                             entry.getHeader().getTableName(), eventType,
@@ -151,7 +151,7 @@ public class CanalUtils {
                             entry.getHeader().getGtid(), String.valueOf(delayTime) });
 
                 if (eventType == EventType.QUERY || rowChage.getIsDdl()) {
-                    logger.info("ddl : " + rowChage.getIsDdl() + " ,  sql ----> " + rowChage.getSql() + SEP);
+                    logger.debug("ddl : " + rowChage.getIsDdl() + " ,  sql ----> " + rowChage.getSql() + SEP);
                     continue;
                 }
 
@@ -188,7 +188,7 @@ public class CanalUtils {
                 builder.append("    update=" + column.getUpdated());
             }
             builder.append(SEP);
-            logger.info(builder.toString());
+            logger.debug(builder.toString());
         }
     }
 
@@ -209,7 +209,7 @@ public class CanalUtils {
         }
 
         if (xaType != null && xaXid != null) {
-            logger.info(" ------> " + xaType + " " + xaXid);
+            logger.debug(" ------> " + xaType + " " + xaXid);
         }
     }
 
