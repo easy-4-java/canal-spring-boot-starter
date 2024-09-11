@@ -3,8 +3,8 @@ package com.alibaba.otter.canal.handler;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 
 /**
- * @author yang peng
- * @date 2019/3/2917:20
+ * 处理行数据
+ * @param <T> 行数据
  */
 public interface RowDataHandler<T> {
 

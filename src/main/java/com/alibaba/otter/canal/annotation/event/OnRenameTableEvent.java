@@ -21,12 +21,14 @@ public @interface OnRenameTableEvent {
     /**
      * canal 指令
      * default for all
+     * @return canal 指令
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String destination() default "";
 
     /**
      * 数据库实例
+     * @return 数据库实例
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String schema();

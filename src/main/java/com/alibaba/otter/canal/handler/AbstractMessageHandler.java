@@ -20,10 +20,7 @@ import org.springframework.util.ReflectionUtils;
 import java.lang.reflect.Method;
 import java.util.*;
 
-/**
- * @author yang peng
- * @date 2019/3/2921:38
- */
+
 @Slf4j
 public abstract class AbstractMessageHandler implements MessageHandler<Message>, ApplicationContextAware {
 

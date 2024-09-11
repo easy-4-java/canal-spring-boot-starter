@@ -21,14 +21,14 @@ public @interface OnInsertEvent {
     /**
      * canal 指令
      * default for all
-     *
+     * @return canal destination
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String destination() default "";
 
     /**
      * 数据库实例
-     *
+     * @return 数据库实例
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String schema();
@@ -36,7 +36,7 @@ public @interface OnInsertEvent {
     /**
      * 监听的表
      * default for all
-     *
+     * @return table name
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String table();

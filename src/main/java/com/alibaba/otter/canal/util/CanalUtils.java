@@ -216,8 +216,8 @@ public class CanalUtils {
 	/**
      * 获取当前Entry的 GTID信息示例
      *
-     * @param header
-     * @return
+     * @param header header
+     * @return   GTID
      */
     public static String getCurrentGtid(CanalEntry.Header header) {
         List<CanalEntry.Pair> props = header.getPropsList();
@@ -234,8 +234,8 @@ public class CanalUtils {
     /**
      * 获取当前Entry的 GTID Sequence No信息示例
      *
-     * @param header
-     * @return
+     * @param header header
+     * @return GTID Sequence No
      */
     public static String getCurrentGtidSn(CanalEntry.Header header) {
         List<CanalEntry.Pair> props = header.getPropsList();
@@ -252,8 +252,8 @@ public class CanalUtils {
     /**
      * 获取当前Entry的 GTID Last Committed信息示例
      *
-     * @param header
-     * @return
+     * @param header header
+     * @return GTID Last Committed
      */
     public static String getCurrentGtidLct(CanalEntry.Header header) {
         List<CanalEntry.Pair> props = header.getPropsList();

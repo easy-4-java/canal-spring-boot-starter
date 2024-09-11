@@ -16,15 +16,18 @@ import java.lang.annotation.*;
 @Documented
 @OnCanalEvent(eventType = CanalEntry.EventType.CINDEX)
 public @interface OnCreateIndexEvent {
+
     /**
      * canal 指令
      * default for all
+     * @return canal destination
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String destination() default "";
 
     /**
      * 数据库实例
+     * @return 数据库实例
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String schema();
@@ -32,6 +35,7 @@ public @interface OnCreateIndexEvent {
     /**
      * 监听的表
      * default for all
+     * @return 监听的表
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String table();

@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author yang peng
- * @date 2019/3/2711:21
+ * canal 消息模型
  */
 @Setter
 @Getter

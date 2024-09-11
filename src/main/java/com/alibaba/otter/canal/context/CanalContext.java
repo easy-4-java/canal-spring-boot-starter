@@ -4,8 +4,7 @@ import com.alibaba.otter.canal.model.CanalModel;
 import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
- * @author yang peng
- * @date 2019/3/2711:17
+ * canal上下文
  */
 public class CanalContext {
 

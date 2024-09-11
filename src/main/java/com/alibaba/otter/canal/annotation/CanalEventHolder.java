@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class CanalEventHolder {
 
     /**
-     * 目标
+     * 目标 bean
      */
     private Object target;
     /**
@@ -28,7 +28,9 @@ public class CanalEventHolder {
 
     /**
      * 构造方法，设置目标，方法以及注解类型
-     *
+     * @param target Object 目标
+     * @param method Method 方法
+     * @param event OnCanalEvent 注解
      */
     public CanalEventHolder(Object target, Method method, OnCanalEvent event) {
         this.target = target;
@@ -38,7 +40,7 @@ public class CanalEventHolder {
 
     /**
      * 返回目标类
-     *
+     * @return Object
      */
     public Object getTarget() {
         return target;
@@ -46,7 +48,7 @@ public class CanalEventHolder {
 
     /**
      * 返回方法
-     *
+     * @return Method
      */
     public Method getMethod() {
         return method;
@@ -54,7 +56,7 @@ public class CanalEventHolder {
 
     /**
      * 返回注解类型
-     *
+     * @return OnCanalEvent
      */
     public OnCanalEvent getEvent() {
         return event;

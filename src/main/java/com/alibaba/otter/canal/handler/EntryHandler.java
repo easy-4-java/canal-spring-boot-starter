@@ -1,8 +1,8 @@
 package com.alibaba.otter.canal.handler;
 
 /**
- * @author yang peng
- * @date 2019/3/2915:46
+ * 处理 Entry
+ * @param <R> Entry
  */
 public interface EntryHandler<R> {
 

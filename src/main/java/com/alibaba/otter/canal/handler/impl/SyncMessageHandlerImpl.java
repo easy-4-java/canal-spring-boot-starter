@@ -10,8 +10,7 @@ import com.alibaba.otter.canal.protocol.Message;
 import java.util.List;
 
 /**
- * @author yang peng
- * @date 2019/3/2710:52
+ * 同步处理 Message
  */
 public class SyncMessageHandlerImpl extends AbstractMessageHandler {
 

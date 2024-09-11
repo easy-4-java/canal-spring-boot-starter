@@ -3,8 +3,7 @@ package com.alibaba.otter.canal.handler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author yang peng
- * @date 2019/4/117:29
+ * Canal 线程未捕获异常处理器
  */
 @Slf4j
 public class CanalThreadUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {

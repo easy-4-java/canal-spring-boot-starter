@@ -19,12 +19,14 @@ public @interface OnDropIndexEvent {
     /**
      * canal 指令
      * default for all
+     * @return canal destination
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String destination() default "";
 
     /**
      * 数据库实例
+     * @return 数据库实例
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String schema();
@@ -32,6 +34,7 @@ public @interface OnDropIndexEvent {
     /**
      * 监听的表
      * default for all
+     * @return 监听的表
      */
     @AliasFor(annotation = OnCanalEvent.class)
     String table();

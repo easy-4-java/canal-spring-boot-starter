@@ -11,8 +11,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.List;
 
 /**
- * @author yang peng
- * @date 2019/3/2921:40
+ *
  */
 public class AsyncMessageHandlerImpl extends AbstractMessageHandler {
 

@@ -16,8 +16,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * @author yang peng
- * @date 2019/3/2713:33
+ * 处理器工具类
  */
 public class HandlerUtil {
 

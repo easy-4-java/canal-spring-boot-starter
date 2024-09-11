@@ -17,8 +17,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author yang peng
- * @date 2019/3/2910:45
+ * 泛型工具类
  */
 public class GenericUtil {
 
