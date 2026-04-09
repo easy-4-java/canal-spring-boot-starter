@@ -32,8 +32,6 @@ canal:
         host: 127.0.0.1
         # Canal Server 端口。如果设置了address属性，则忽略。默认为 5672
         port: 11111
-        # Canal Server 地址。如果设置了该属性，则忽略host和port属性。
-        addresses: xxx
         # Canal Server 用户名
         username: xxx
         # Canal Server 密码
@@ -49,11 +47,7 @@ canal:
   # Cluster 客户端模式配置
   cluster:
     instances:
-      - # Canal Server 主机地址。如果设置了address属性，则忽略。
-        host: 127.0.0.1
-        # Canal Server 端口。如果设置了address属性，则忽略。默认为 5672
-        port: 11111
-        # Canal Server 地址。如果设置了该属性，则忽略host和port属性。
+      - # Canal Server 地址。如果设置了该属性，则忽略host和port属性。
         addresses: xxx
         #  Canal Zookeeper 地址
         zk-servers: : xxx
